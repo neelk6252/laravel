@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+       $post = post::all();
+       return view('posts.index',['posts'=>$post]);
     }
 
     /**
@@ -46,7 +47,7 @@ class PostController extends Controller
      */
     public function show(post $post)
     {
-        //
+        return view('posts.show', ['post'=>$post]);
     }
 
     /**
