@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-       $post = post::all();
+       $post = post::orderBy('id','desc')->paginate(10);
        return view('posts.index',['posts'=>$post]);
     }
 
@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -36,7 +36,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'title'=>'required|min:5',
+            'content'=>'required|min:15'
+        ]);
+        post::create([
+            'title'=>$request->title,
+            'content'=>$request->content
+        ]);
+        return redirect(route('posts.index'));
     }
 
     /**

@@ -10,4 +10,8 @@
 </div>
 </div>
 @endforeach
+<div class="my-4">
+{{$posts->links()}}
+</div>
+
 @endsection
