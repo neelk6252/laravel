@@ -66,7 +66,7 @@ class PostController extends Controller
      */
     public function edit(post $post)
     {
-        //
+        return view('posts.edit',compact('post'));
     }
 
     /**
@@ -78,7 +78,12 @@ class PostController extends Controller
      */
     public function update(Request $request, post $post)
     {
-        //
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+        session()->flash('message','the post is updated sussesfully');
+        return redirect()->back();
     }
 
     /**
@@ -89,6 +94,8 @@ class PostController extends Controller
      */
     public function destroy(post $post)
     {
-        //
+        $post->delete();
+        session()->flash('message1','your post is deleted successfully');
+        return redirect(route('posts.index'));
     }
 }
